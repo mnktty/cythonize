@@ -1,0 +1,21 @@
+# Makefile for Win32 
+
+CC=gcc
+CFLAGS=-I /c/Programs/Python27/include
+LIBS=-L /c/Programs/Python27/libs -lpython27
+
+packed:
+	$(CC) -c $(CFLAGS) main.c 
+	$(CC) -o cwrapped.exe main.o $(LIBS) ./hello.pyd -Wl,-soname,hello.pyd hello.pyd
+
+
+# If hello.pxd is manually renamed to hello.dll, then you can link directly as
+# -L. -lhello
+
+.PHONY=clean
+
+clean:
+	rm cwrapped.exe
+
+
+#eof
